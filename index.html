@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Excel Data Viewer</title>
+</head>
+<body>
+  <h1>Excel (CSV) Data</h1>
+  <table border="1" id="data-table"></table>
+
+  <script>
+    fetch('DATA.csv')
+      .then(response => response.text())
+      .then(csv => {
+        const rows = csv.split('\n');
+        let table = '';
+        rows.forEach(row => {
+          const cols = row.split(',');
+          table += '<tr>' + cols.map(col => `<td>${col}</td>`).join('') + '</tr>';
+        });
+        document.getElementById('data-table').innerHTML = table;
+      });
+  </script>
+</body>
+</html>
